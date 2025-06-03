@@ -1,0 +1,32 @@
+{
+    "name": "members-only",
+    "version": "1.0.0",
+    "description": "Members-Only",
+    "main": "index.js",
+    "scripts": {
+        "devStart": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Maiker260/Members-Only.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "bugs": {
+        "url": "https://github.com/Maiker260/Members-Only/issues"
+    },
+    "homepage": "https://github.com/Maiker260/Members-Only#readme",
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "express": "^5.1.0",
+        "express-session": "^1.18.1",
+        "passport": "^0.7.0",
+        "passport-local": "^1.0.0",
+        "pg": "^8.16.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.10"
+    }
+}
