@@ -10,8 +10,8 @@ const createTables = `
         lastName TEXT NOT NULL,
         userName VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
-        isMember BOOLEAN NOT NULL,
-        isAdmin BOOLEAN NOT NULL
+        isMember BOOLEAN DEFAULT FALSE,
+        isAdmin BOOLEAN DEFAULT FALSE
     );
 
     CREATE TABLE IF NOT EXISTS messages (

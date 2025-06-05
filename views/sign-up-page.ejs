@@ -10,40 +10,75 @@
         <header class="header">
             <h1>Sign Up Now!</h1>
         </header>
-        <section>
-            <form action="/sign-up" method="post">
+        <section class="content">
+            <form method="POST" action="/sign-up" autocomplete="off">
                 <div class="input_container">
-                    <label for="formName">
-                        Name:
-                    </label>
-                    <input type="text" name="name" id="formName" class="input_bar">
+                    <div class="inputs">
+                        <label for="formName">
+                            Name:
+                        </label>
+                        <input type="text" name="name" id="formName" class="input_bar" value="<%= oldInput?.name || '' %>">
+                    </div>
+                    <% if (errors?.name) { %>
+                        <p style="color:red;"><%= errors.name.msg %></p>
+                    <% } %>
                 </div>
                 <div class="input_container">
-                    <label for="formLastname">
-                        Last Name:
-                    </label>
-                    <input type="text" name="lastname" id="formLastname" class="input_bar">
+                    <div class="inputs">
+                        <label for="formLastname">
+                            Last Name:
+                        </label>
+                        <input type="text" name="lastname" id="formLastname" class="input_bar" value="<%= oldInput?.lastname || '' %>">
+                    </div>
+                    <% if (errors?.lastname) { %>
+                        <p style="color:red;"><%= errors.lastname.msg %></p>
+                    <% } %>
                 </div>
                 <div class="input_container">
-                    <label for="formUsername">
-                        Username:
-                    </label>
-                    <input type="text" name="username" id="formUsername" class="input_bar">
+                    <div class="inputs">
+                        <label for="formUsername">
+                            Username:
+                        </label>
+                        <input type="text" name="username" id="formUsername" class="input_bar" value="<%= oldInput?.username || '' %>">
+                    </div>
+                    <% if (errors?.username) { %>
+                        <p style="color:red;"><%= errors.username.msg %></p>
+                    <% } %>
                 </div>
                 <div class="input_container">
-                    <label for="formPassword">
-                        Password:
-                    </label>
-                    <input type="text" name="password" id="formPassword" class="input_bar">
+                    <div class="inputs">
+                        <label for="formPassword">
+                            Password:
+                        </label>
+                        <input type="text" name="password" id="formPassword" class="input_bar" autocomplete="new-password">
+                    </div>
+                    <% if (errors?.password) { %>
+                        <p style="color:red;"><%= errors.password.msg %></p>
+                    <% } %>
                 </div>
                 <div class="input_container">
-                    <label for="formPasswordConfirmation">
-                        Password Confirmation:
-                    </label>
-                    <input type="text" name="passwordConfirmation" id="formPasswordConfirmation" class="input_bar">
+                    <div class="inputs">
+                        <label for="formPasswordConfirmation">
+                            Password Confirmation:
+                        </label>
+                        <input type="text" name="passwordConfirmation" id="formPasswordConfirmation" class="input_bar" autocomplete="new-password">
+                    </div>
+                    <% if (errors?.passwordConfirmation) { %>
+                        <p style="color:red;"><%= errors.passwordConfirmation.msg %></p>
+                    <% } %>
                 </div>
+                <input type="submit" value="Submit">
             </form>
         </section>
-    </mai>
+    </main>
+    <script>
+        // Clear form when page is restored from bfcache (back button)
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                const form = document.querySelector("form");
+                if (form) form.reset();
+            }
+        });
+    </script>
 </body>
 </html>
