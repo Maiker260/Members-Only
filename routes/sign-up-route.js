@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
 
-    res.render("sign-up-page", {
+    res.render("sign-up-form", {
         errors: [],
         oldInput: {},
     });
@@ -24,11 +24,12 @@ router.post("/", validationForm, async (req, res) => {
     const errors = validationResult(req);
     const { password, passwordConfirmation, ...safeInput } = req.body;
     const { name, lastname, username } = safeInput;
+    const formatedUsername = username.toLowerCase();
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     if (!errors.isEmpty()) {
-        return res.status(400).render("sign-up-page", {
+        return res.status(400).render("sign-up-form", {
             errors: errors.mapped(),
             oldInput: safeInput,
         });
@@ -37,7 +38,7 @@ router.post("/", validationForm, async (req, res) => {
     try {
         await dbQuery(
             `INSERT INTO users (name, lastname, username, password) VALUES ($1, $2, $3, $4)`,
-            [name, lastname, username, hashedPassword]
+            [name, lastname, formatedUsername, hashedPassword]
         );
 
         res.redirect("/");

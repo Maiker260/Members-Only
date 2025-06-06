@@ -7,8 +7,8 @@ const createTables = `
     CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
-        lastName TEXT NOT NULL,
-        userName VARCHAR(255) NOT NULL UNIQUE,
+        lastname TEXT NOT NULL,
+        username VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
         isMember BOOLEAN DEFAULT FALSE,
         isAdmin BOOLEAN DEFAULT FALSE
@@ -28,7 +28,7 @@ async function insertDummyData() {
 
     const user1 = await dbQuery(
         `
-            INSERT INTO users (name, lastName, userName, password, isMember, isAdmin)
+            INSERT INTO users (name, lastname, username, password, isMember, isAdmin)
             VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id;
         `,
@@ -37,7 +37,7 @@ async function insertDummyData() {
 
     const user2 = await dbQuery(
         `
-            INSERT INTO users (name, lastName, userName, password, isMember, isAdmin)
+            INSERT INTO users (name, lastname, username, password, isMember, isAdmin)
             VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id;
         `,
