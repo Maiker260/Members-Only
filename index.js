@@ -5,12 +5,14 @@ import { fileURLToPath } from "node:url";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import session from "express-session";
+import { loginAuthentication } from "./controllers/login-authentication.js";
+import { serialize, deserialize } from "./controllers/user-session.js";
 import dotenv from "dotenv";
 import mainRouter from "./routes/main.js";
 import signUpRouter from "./routes/sign-up-route.js";
 import loginRouter from "./routes/login-route.js";
-import { loginAuthentication } from "./controllers/login-authentication.js";
-import { serialize, deserialize } from "./controllers/user-session.js";
+import logoutRouter from "./routes/log-out-route.js";
+import authForm from "./routes/authenticate-form.js";
 
 dotenv.config();
 
@@ -40,8 +42,9 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/", mainRouter);
+app.use("/auth", authForm);
 app.use("/sign-up", signUpRouter);
-
 app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
 
 app.listen(3000, () => console.log("Running App!"));

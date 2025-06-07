@@ -5,18 +5,6 @@ import passport from "passport";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    const messages = req.session.messages || [];
-
-    res.render("login-form", {
-        errors: [],
-        oldInput: {},
-        failureMessage: messages[0] || null,
-    });
-
-    req.session.messages = [];
-});
-
 router.post(
     "/",
     loginValidator,
@@ -25,17 +13,17 @@ router.post(
         const { password, ...safeInput } = req.body;
 
         if (!errors.isEmpty()) {
-            return res.status(400).render("login-form", {
-                errors: errors.mapped(),
-                oldInput: safeInput,
-            });
+            req.session.formErrors = errors.mapped();
+            req.session.oldInput = safeInput;
+
+            return res.redirect("/auth?mode=login");
         }
 
         next();
     },
     passport.authenticate("local", {
         successRedirect: "/",
-        failureRedirect: "/login",
+        failureRedirect: "/auth?mode=login",
         failureMessage: true,
     })
 );

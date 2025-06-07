@@ -11,14 +11,10 @@ export async function loginAuthentication(username, password, done) {
 
         const user = query[0];
 
-        if (!user) {
-            return done(null, false, { message: "Incorrect username" });
-        }
-
-        const passwordMatch = await bcrypt.compare(password, user.password);
-
-        if (!passwordMatch) {
-            return done(null, false, { message: "Incorrect password" });
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return done(null, false, {
+                message: "Incorrect Username or Password",
+            });
         }
 
         return done(null, user);
