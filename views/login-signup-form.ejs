@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/Sign-Up</title>
+    <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/login-signup.css" />
     <script>
         window.authMode = "<%= mode %>";
@@ -13,7 +14,7 @@
 <body>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form class="signup-form form <%= Object.keys(errors).length > 0 ? "form-error" : "" %> " action="/sign-up" method="POST">
+		<form class="signup-form form flex<%= Object.keys(errors).length > 0 ? "form-error" : "" %> " action="/sign-up" method="POST">
 			<h1>Create Account</h1>
 			<div class="input-container">
 				<input type="text" name="name" placeholder="Name" value="<%= oldInput?.name || '' %>"/>
@@ -49,7 +50,7 @@
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form class="login-form form" action="/login" method="POST">
+		<form class="login-form form flex" action="/login" method="POST">
 			<h1>Sign in</h1>
 			<div class="input-container">
 				<input type="text" name="username" placeholder="Username" />
@@ -74,12 +75,12 @@
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
-			<div class="overlay-panel overlay-left">
+			<div class="overlay-panel overlay-left flex">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
 				<button class="ghost switch-btn" id="signIn">Sign In</button>
 			</div>
-			<div class="overlay-panel overlay-right">
+			<div class="overlay-panel overlay-right flex">
 				<h1>Hello, Friend!</h1>
 				<p>Enter your personal details and start journey with us</p>
 				<button class="ghost switch-btn" id="signUp">Sign Up</button>

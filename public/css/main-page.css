@@ -1,0 +1,115 @@
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.header-container {
+    top: 0;
+}
+
+.navbar {
+    padding: 1em;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+        to right,
+        var(--primary-color),
+        var(--primary-color-2)
+    );
+    color: var(--terciary-color);
+    border-bottom: 1px solid var(--input-bg-color);
+}
+
+.user-info {
+    align-items: center;
+}
+
+.arrow {
+    width: 30px;
+    height: 30px;
+}
+
+.auth-btns-container {
+    gap: 1em;
+}
+
+.auth-btn {
+}
+
+.auth-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: var(--switch-btn-bg-color);
+    color: var(--switch-btn-text-color);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-btn:hover {
+    background-color: #e0e0e0;
+    color: #276ca0;
+}
+
+.content-container {
+    height: 100%;
+    padding: 1em;
+    overflow-y: auto;
+}
+
+.messages-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.message {
+    border-radius: 0.3em;
+    border: 1px solid black;
+    padding: 1em;
+    gap: 1em;
+}
+
+.message-header {
+    align-items: center;
+    gap: 0.5em;
+}
+
+.message-profile-picture {
+    width: 30px;
+    object-fit: contain;
+    border-radius: 2em;
+}
+
+.message-data {
+    gap: 0.5em;
+}
+
+.message-title {
+    font-size: 1.5rem;
+}
+
+.message-content {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1.2rem;
+}
+
+footer {
+    padding: 1em;
+    background: #eee;
+    text-align: center;
+}

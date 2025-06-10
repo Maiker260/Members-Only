@@ -3,13 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Members Club</title>
+    <title>OnlyMembers</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/main-page.css">
 </head>
 <body>
-    <h1>This is the Main Page</h1>
-    <h2>You are logged in as <%=user.username || "" %> </h2>
-    <a href="/auth?mode=sign-up">Sign Up</a>
-    <a href="/auth?mode=login">Login</a>
-    <a href="/logout">Logout</a>
+    <div class="main-container grid">
+        <header class="header-container">
+            <nav class="navbar flex">
+                <h1 class="main-title">OnlyMembers</h1>
+                <% if (user && user.username) {%>
+                    <div class="user-info flex">
+                        <p><%=user.username%></p>
+                        <div>
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#000000" data-darkreader-inline-fill="" style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);"></path> </g></svg>
+                        </div>
+                    </div>                
+                <% } else {%>
+                    <div class="auth-btns-container flex">
+                        <a class="auth-btn" href="/auth?mode=login">Login</a>
+                        <a class="auth-btn" href="/auth?mode=sign-up">Sign Up</a>
+                    </div>
+                <% } %>
+            </nav>
+        </header>
+        <main class="content-container">
+            <section class="messages-container flex-column">
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <p class="message-user">YoMerito</p>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <p class="message-user">YoMerito</p>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+                <article class="message flex-column">
+                    <header class="message-header flex">
+                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
+                        <h5 class="message-user">YoMerito</h5>
+                        <span>•</span>
+                        <p class="message-date">June 10</p>
+                    </header>
+                    <main class="message-data flex-column">
+                        <h3 class="message-title">My Title</h3>
+                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
+                    </main>
+                </article>
+            </section>
+        </main>
+        <footer>
+            <h1>THIS IS A FOOTER</h1>
+        </footer>
+    </div>
 </body>
 </html>
