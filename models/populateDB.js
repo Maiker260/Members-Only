@@ -10,6 +10,7 @@ const createTables = `
         lastname TEXT NOT NULL,
         username VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
+        profile_photo TEXT DEFAULT 'images/Profile-Picture.webp',
         isMember BOOLEAN DEFAULT FALSE,
         isAdmin BOOLEAN DEFAULT FALSE
     );
@@ -17,8 +18,9 @@ const createTables = `
     CREATE TABLE IF NOT EXISTS messages (
         id SERIAL PRIMARY KEY,
         users_id INT NOT NULL,
+        title TEXT NOT NULL,
         content TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
     );
 `;
@@ -46,18 +48,18 @@ async function insertDummyData() {
 
     await dbQuery(
         `
-            INSERT INTO messages (users_id, content)
-            VALUES ($1, $2);
+            INSERT INTO messages (users_id, title, content)
+            VALUES ($1, $2, $3);
         `,
-        [user1[0].id, "This is the YoMerito message"]
+        [user1[0].id, "Testing", "This is the YoMerito message"]
     );
 
     await dbQuery(
         `
-            INSERT INTO messages (users_id, content)
-            VALUES ($1, $2);
+            INSERT INTO messages (users_id, title, content)
+            VALUES ($1, $2, $3);
         `,
-        [user2[0].id, "This is the YoNoMeritont message"]
+        [user2[0].id, "Testing", "This is the YoNoMeritont message"]
     );
 }
 
