@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import { dbQuery } from "../models/dbQuery.js";
 
 export const validationForm = [
     body("name")
@@ -33,6 +34,18 @@ export const validationForm = [
                 throw new Error(
                     "Username must contain both letters and numbers."
                 );
+            }
+
+            return true;
+        })
+        .custom(async (value) => {
+            const isUserDuplicated = await dbQuery(
+                `SELECT username FROM users WHERE username = $1`,
+                [value]
+            );
+
+            if (isUserDuplicated[0]) {
+                throw new Error("Username already exist.");
             }
 
             return true;

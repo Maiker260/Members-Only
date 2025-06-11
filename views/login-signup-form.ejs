@@ -12,82 +12,89 @@
     <script src="/script/login-signup.js" defer></script>
 </head>
 <body>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form class="signup-form form flex<%= Object.keys(errors).length > 0 ? "form-error" : "" %> " action="/sign-up" method="POST">
-			<h1>Create Account</h1>
-			<div class="input-container">
-				<input type="text" name="name" placeholder="Name" value="<%= oldInput?.name || '' %>"/>
-				<% if (errors?.name) { %>
-					<p class="sign-up-errors errors"><%= errors.name.msg %></p>
-				<% } %>
+	<div class="main-container">
+		<header class="header-container">
+			<nav class="navbar flex">
+				<a href="/" class="main-title">OnlyMembers</a>
+			</nav>
+		</header>
+		<main class="container" id="container">
+			<div class="form-container sign-up-container">
+				<form class="signup-form form flex<%= Object.keys(errors).length > 0 ? "form-error" : "" %> " action="/sign-up" method="POST">
+					<h1>Create Account</h1>
+					<div class="input-container">
+						<input type="text" name="name" placeholder="Name" value="<%= oldInput?.name || '' %>"/>
+						<% if (errors?.name) { %>
+							<p class="sign-up-errors errors"><%= errors.name.msg %></p>
+						<% } %>
+					</div>
+					<div class="input-container">
+						<input type="text" name="lastname" placeholder="Lastname" value="<%= oldInput?.lastname || '' %>"/>
+						<% if (errors?.lastname) { %>
+							<p class="sign-up-errors errors"><%= errors.lastname.msg %></p>
+						<% } %>
+					</div>
+					<div class="input-container">
+						<input type="text" name="username" placeholder="Username" value="<%= oldInput?.username || '' %>"/>
+						<% if (errors?.username) { %>
+							<p class="sign-up-errors errors"><%= errors.username.msg %></p>
+						<% } %>
+					</div>
+					<div class="input-container">
+						<input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
+						<% if (errors?.password) { %>
+							<p class="sign-up-errors errors"><%= errors.password.msg %></p>
+						<% } %>
+					</div>
+					<div class="input-container">
+						<input type="password" name="passwordConfirmation" placeholder="Confirm Password" autocomplete="new-password"/>
+						<% if (errors?.passwordConfirmation) { %>
+							<p class="sign-up-errors errors"><%= errors.passwordConfirmation.msg %></p>
+						<% } %>
+					</div>
+					<button>Sign Up</button>
+				</form>
 			</div>
-			<div class="input-container">
-				<input type="text" name="lastname" placeholder="Lastname" value="<%= oldInput?.lastname || '' %>"/>
-				<% if (errors?.lastname) { %>
-					<p class="sign-up-errors errors"><%= errors.lastname.msg %></p>
-				<% } %>
+			<div class="form-container sign-in-container">
+				<form class="login-form form flex" action="/login" method="POST">
+					<h1>Sign in</h1>
+					<div class="input-container">
+						<input type="text" name="username" placeholder="Username" />
+						<% if (errors?.username) { %>
+							<p class="login-errors errors"><%= errors.username.msg %></p>
+						<% } %>
+					</div>
+					<div class="input-container">
+						<input type="password" name="password" placeholder="Password" />
+						<% if (errors?.password) { %>
+							<p class="login-errors errors"><%= errors.password.msg %></p>
+						<% } %>
+					</div>
+					<% if (failureMessage)  {%>
+						<p class="errors" >
+							<%= failureMessage  %>
+						</p>
+					<% } %>
+					<!-- <a href="#">Forgot your password?</a> -->
+					<button>Sign In</button>
+				</form>
 			</div>
-			<div class="input-container">
-				<input type="text" name="username" placeholder="Username" value="<%= oldInput?.username || '' %>"/>
-				<% if (errors?.username) { %>
-					<p class="sign-up-errors errors"><%= errors.username.msg %></p>
-				<% } %>
+			<div class="overlay-container">
+				<div class="overlay">
+					<div class="overlay-panel overlay-left flex">
+						<h1>Welcome Back!</h1>
+						<p>To keep connected with us please login with your personal info</p>
+						<button class="ghost switch-btn" id="signIn">Sign In</button>
+					</div>
+					<div class="overlay-panel overlay-right flex">
+						<h1>Hello, Friend!</h1>
+						<p>Enter your personal details and start journey with us</p>
+						<button class="ghost switch-btn" id="signUp">Sign Up</button>
+					</div>
+				</div>
 			</div>
-			<div class="input-container">
-				<input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
-				<% if (errors?.password) { %>
-					<p class="sign-up-errors errors"><%= errors.password.msg %></p>
-				<% } %>
-			</div>
-			<div class="input-container">
-				<input type="password" name="passwordConfirmation" placeholder="Confirm Password" autocomplete="new-password"/>
-				<% if (errors?.passwordConfirmation) { %>
-					<p class="sign-up-errors errors"><%= errors.passwordConfirmation.msg %></p>
-				<% } %>
-			</div>
-			<button>Sign Up</button>
-		</form>
+		</main>
 	</div>
-	<div class="form-container sign-in-container">
-		<form class="login-form form flex" action="/login" method="POST">
-			<h1>Sign in</h1>
-			<div class="input-container">
-				<input type="text" name="username" placeholder="Username" />
-				<% if (errors?.username) { %>
-					<p class="login-errors errors"><%= errors.username.msg %></p>
-				<% } %>
-			</div>
-			<div class="input-container">
-				<input type="password" name="password" placeholder="Password" />
-				<% if (errors?.password) { %>
-					<p class="login-errors errors"><%= errors.password.msg %></p>
-				<% } %>
-			</div>
-			<% if (failureMessage)  {%>
-				<p class="errors" >
-					<%= failureMessage  %>
-				</p>
-			<% } %>
-			<!-- <a href="#">Forgot your password?</a> -->
-			<button>Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left flex">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost switch-btn" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right flex">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost switch-btn" id="signUp">Sign Up</button>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- CREDITS: -->
 <!-- <footer> -->
 	<!-- <p> -->

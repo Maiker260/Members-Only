@@ -8,6 +8,42 @@ body {
     margin: -20px 0 0;
 }
 
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.navbar {
+    padding: 1em 2em;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+        to right,
+        var(--primary-color),
+        var(--primary-color-2)
+    );
+    color: var(--terciary-color);
+    border-bottom: 1px solid var(--input-bg-color);
+    width: 1800px;
+    height: 70px;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--secundary-color);
+}
+
+.main-title:focus-visible {
+    outline: none;
+}
+
+.main-title:active {
+    color: inherit;
+}
+
 h1 {
     font-weight: bold;
     margin: 0;

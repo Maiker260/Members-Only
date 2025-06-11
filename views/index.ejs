@@ -6,19 +6,26 @@
     <title>OnlyMembers</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/main-page.css">
+    <script src="/script/main-page.js" defer></script>
 </head>
 <body>
     <div class="main-container grid">
         <header class="header-container">
             <nav class="navbar flex">
-                <h1 class="main-title">OnlyMembers</h1>
+                <a href="/" class="main-title">OnlyMembers</a>
                 <% if (user && user.username) {%>
-                    <div class="user-info flex">
-                        <p><%=user.username%></p>
-                        <div>
-                            <svg class="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#000000" data-darkreader-inline-fill="" style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);"></path> </g></svg>
-                        </div>
-                    </div>                
+                    <div class="user-info flex" id="userInfo">
+                        <img src="<%=user.profile_photo%>" alt="Profile-Picture" class="message-profile-picture">
+                        <p class="user-name"><%=user.username%></p>
+                        <svg class="arrow" id="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" data-darkreader-inline-fill="" style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);"></path> </g></svg>                        
+                        
+                        <dialog id="userDialog">
+                            <ul class="dialog-list flex-column">
+                                <li id="newPostBtn" class="dialog-list-item dialog-list-new-post">New Post</li>
+                                <li class="dialog-list-item dialog-list-logout"><a href="/logout">Logout</a></li>
+                            </ul>
+                        </dialog>
+                    </div>
                 <% } else {%>
                     <div class="auth-btns-container flex">
                         <a class="auth-btn" href="/auth?mode=login">Login</a>
@@ -28,115 +35,63 @@
             </nav>
         </header>
         <main class="content-container">
+            <dialog id="newMessageDialog" class="new-message-dialog">
+                <button type="button" id="newMessageDialogCloseBtn" class="new-message-dialog-close-btn">✖</button>
+                
+                <form class="new-message-form flex-column" action="/new-message" method="POST">
+                    <div class="new-message-form-input-container flex-column">
+                        <label class="new-message-form-labels" for="title">
+                            Title
+                        </label>
+                        <input class="new-message-form-inputs" type="text" name="messageTitle" id="title" required>
+                    </div>
+                    <div class="new-message-form-input-container flex-column">
+                        <label class="new-message-form-labels" for="message">
+                            Message
+                        </label>
+                        <textarea class="new-message-form-inputs new-message-form-textarea" name="messageContent" id="message" required></textarea>
+                    </div>
+                    <input class="new-message-form-submit-btn" type="submit" value="Submit">
+                </form>
+            </dialog>
+            <dialog id="reqMembershipDialog" class="new-message-dialog">
+                <button type="button" id="reqMembershipDialogCloseBtn" class="new-message-dialog-close-btn">✖</button>
+
+                <form class="new-message-form flex-column" action="/req-membership" method="POST">
+                     <div class="new-message-form-input-container flex-column">
+                        <label class="new-message-form-labels" for="membership">
+                            Type "I want it that way":
+                        </label>
+                        <input class="new-message-form-inputs" type="text" name="membership" id="membership" required>
+                    </div>
+                    <input class="new-message-form-submit-btn" type="submit" value="Submit">
+                </form>
+            </dialog>
+            <% if (user && !user.ismember) { %>
+                <div class="request-membership-button-container">
+                    <button id="reqMembershipBtn" class="request-membership-button">Request Membership</button>
+                </div>
+            <% } %>
             <section class="messages-container flex-column">
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <p class="message-user">YoMerito</p>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <p class="message-user">YoMerito</p>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
-                <article class="message flex-column">
-                    <header class="message-header flex">
-                        <img src="images/Profile-Picture.webp" alt="Profile-Picture" class="message-profile-picture">
-                        <h5 class="message-user">YoMerito</h5>
-                        <span>•</span>
-                        <p class="message-date">June 10</p>
-                    </header>
-                    <main class="message-data flex-column">
-                        <h3 class="message-title">My Title</h3>
-                        <p class="message-content">THIS IS A VERY IMPORTANT MESSAGE</p>
-                    </main>
-                </article>
+                <% messages.forEach(message => { %>
+                    <article class="message flex-column">
+                        <header class="message-header flex">
+                            <% if (!user || !user.ismember) { %>
+                                <img src="images/Profile-Picture-blur.webp" alt="Profile-Picture" class="message-profile-picture">
+                                <p class="message-user">********</p>
+                            <% } else { %>
+                                <img src="<%=message.profile_photo %>" alt="Profile-Picture" class="message-profile-picture">
+                                <p class="message-user"><%=message.username %></p>
+                            <% } %>
+                            <span>•</span>
+                            <p class="message-date"><%= message.timeAgo %></p>
+                        </header>
+                        <main class="message-data flex-column">
+                            <h3 class="message-title"><%=message.title %></h3>
+                            <p class="message-content"><%= message.content %></p>
+                        </main>
+                    </article>
+                <% }) %>
             </section>
         </main>
         <footer>

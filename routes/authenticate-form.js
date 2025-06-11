@@ -13,6 +13,11 @@ router.get("/", (req, res) => {
     req.session.formErrors = null;
     req.session.oldInput = null;
 
+    if (req.user) {
+        res.redirect("/");
+        return;
+    }
+
     if (mode == "login") {
         res.render("login-signup-form", {
             errors: formErrors,

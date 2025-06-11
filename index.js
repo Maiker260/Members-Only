@@ -12,6 +12,8 @@ import mainRouter from "./routes/main.js";
 import signUpRouter from "./routes/sign-up-route.js";
 import loginRouter from "./routes/login-route.js";
 import logoutRouter from "./routes/log-out-route.js";
+import messageRouter from "./routes/create-message.js";
+import membershipRouter from "./routes/request-membership.js";
 import authForm from "./routes/authenticate-form.js";
 
 dotenv.config();
@@ -46,5 +48,7 @@ app.use("/auth", authForm);
 app.use("/sign-up", signUpRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
+app.use("/new-message", messageRouter);
+app.use("/req-membership", membershipRouter);
 
 app.listen(3000, () => console.log("Running App!"));

@@ -8,7 +8,7 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
-    max-width: 1500px;
+    max-width: 1800px;
     margin: 0 auto;
 }
 
@@ -17,7 +17,7 @@ body {
 }
 
 .navbar {
-    padding: 1em;
+    padding: 1em 2em;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(
@@ -27,22 +27,194 @@ body {
     );
     color: var(--terciary-color);
     border-bottom: 1px solid var(--input-bg-color);
+    height: 70px;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--secundary-color);
+}
+
+.main-title:focus-visible {
+    outline: none;
+}
+
+.main-title:active {
+    color: inherit;
 }
 
 .user-info {
     align-items: center;
+    gap: 0.5em;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.user-name {
+    padding: 0.5em 0;
 }
 
 .arrow {
     width: 30px;
     height: 30px;
+    fill: var(--terciary-color);
+    transition: transform 0.1s ease;
+}
+
+.arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.user-info dialog {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    border-radius: 0.5em;
+    z-index: 10;
+    border-color: #276ca0;
+}
+
+.dialog-list {
+    list-style: none;
+}
+
+.dialog-list a {
+    text-decoration: none;
+}
+
+.dialog-list a:focus-visible {
+    outline: none;
+}
+
+.dialog-list a:active {
+    color: inherit;
+}
+
+.dialog-list-item {
+    padding: 0;
+}
+
+.dialog-list-item a {
+    display: block;
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.dialog-list-item:hover {
+    background-color: #e0e0e0;
+    color: #276ca0;
+}
+
+.dialog-list-new-post {
+    display: block;
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid black;
+}
+
+.dialog-list-new-post:hover {
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+.dialog-list-logout {
+    color: red;
+}
+
+.dialog-list-logout:hover {
+    color: red;
+    border-radius: 0 0 0.5em 0.5em;
+}
+
+.new-message-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    max-width: 90%;
+}
+
+.new-message-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.new-message-dialog-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.new-message-dialog-close-btn:hover {
+    color: #ff4d4d;
+}
+
+.new-message-form {
+    margin-top: 1em;
+    gap: 1em;
+}
+
+.new-message-form-input-container {
+    gap: 0.3em;
+}
+
+.new-message-form-labels {
+    font-size: 1.1rem;
+}
+
+.new-message-form-inputs {
+    width: 100%;
+    padding: 0.7em 0.9em;
+    border-radius: 0.5em;
+    font-size: 1.1rem;
+}
+
+.new-message-form-submit-btn {
+    background-color: var(--form-btn-bg-color);
+    color: var(--form-btn-text-color);
+    width: 100%;
+    border-radius: 0.5em;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.new-message-form-submit-btn:hover {
+    background-color: #0f78c4;
+    color: #dededf;
+}
+
+.new-message-form-textarea {
+    resize: vertical;
+    height: 250px;
 }
 
 .auth-btns-container {
     gap: 1em;
-}
-
-.auth-btn {
 }
 
 .auth-btn {
@@ -106,6 +278,44 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-size: 1.2rem;
+}
+
+.request-membership-button-container {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.request-membership-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.request-membership-button:hover {
+    background-color: #0056b3;
+}
+
+.request-membership-button-container {
+    animation: popIn 0.4s ease-out;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 footer {
