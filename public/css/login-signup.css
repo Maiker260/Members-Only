@@ -25,7 +25,7 @@ body {
     );
     color: var(--terciary-color);
     border-bottom: 1px solid var(--input-bg-color);
-    width: 1800px;
+    width: 100dvw;
     height: 70px;
 }
 
