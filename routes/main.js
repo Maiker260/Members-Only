@@ -7,11 +7,11 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     const rawData = await dbQuery(`
         SELECT 
+            messages.id AS id,
             messages.users_id,
             messages.title,
             messages.content,
             messages.created_at,
-            users.id,
             users.username,
             users.profile_photo
         FROM messages

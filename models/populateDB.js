@@ -3,7 +3,16 @@
 import { dbQuery } from "./dbQuery.js";
 import bcrypt from "bcryptjs";
 
+// Avoid using the default in-memory session store from express-session.
 const createTables = `
+    CREATE TABLE IF NOT EXISTS session (
+        sid varchar NOT NULL PRIMARY KEY,
+        sess json NOT NULL,
+        expire timestamp(6) NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS "IDX_session_expire" ON session (expire);
+
     CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,

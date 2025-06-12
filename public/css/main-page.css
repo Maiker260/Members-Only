@@ -126,6 +126,13 @@ body {
     border-radius: 0.5em 0.5em 0 0;
 }
 
+.inactive {
+    background-color: #e0e0e0;
+    color: #276ca0;
+    border-radius: 0.5em 0.5em 0 0;
+    cursor: not-allowed;
+}
+
 .dialog-list-logout {
     color: red;
 }
@@ -257,12 +264,47 @@ body {
 .message-header {
     align-items: center;
     gap: 0.5em;
+    justify-content: space-between;
 }
 
 .message-profile-picture {
     width: 30px;
     object-fit: contain;
     border-radius: 2em;
+}
+
+.message-remove-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.message-header-right {
+    position: relative;
+}
+
+.message-header-right dialog {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    border-radius: 0.5em;
+    z-index: 10;
+    border-color: #276ca0;
+}
+
+.delete-message-btn {
+    color: red;
+    padding: 1em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5em;
+}
+
+.delete-message-btn:hover {
+    background-color: #e0e0e0;
+    border-radius: 0.5em;
 }
 
 .message-data {
@@ -322,4 +364,9 @@ footer {
     padding: 1em;
     background: #eee;
     text-align: center;
+}
+
+.github-logo {
+    width: 40px;
+    height: 40px;
 }

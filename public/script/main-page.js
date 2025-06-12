@@ -1,72 +1,95 @@
-const userInfo = document.getElementById("userInfo");
-const userDialog = document.getElementById("userDialog");
-const arrow = document.getElementById("arrow");
-const newPostBtn = document.getElementById("newPostBtn");
-const newMessageDialog = document.getElementById("newMessageDialog");
-const newMessageDialogCloseBtn = document.getElementById(
-    "newMessageDialogCloseBtn"
-);
-const reqMembershipDialog = document.getElementById("reqMembershipDialog");
-const reqMembershipBtn = document.getElementById("reqMembershipBtn");
-const reqMembershipDialogCloseBtn = document.getElementById(
-    "reqMembershipDialogCloseBtn"
-);
+const get = (id) => document.getElementById(id);
 
-if (userInfo) {
-    userInfo.addEventListener("click", () => {
-        if (userDialog.open) {
-            userDialog.close();
-            arrow.classList.remove("rotated");
+const userInfo = get("userInfo");
+const userDialog = get("userDialog");
+const arrow = get("arrow");
+
+const newPostBtn = get("newPostBtn");
+const newMessageDialog = get("newMessageDialog");
+const newMessageDialogCloseBtn = get("newMessageDialogCloseBtn");
+
+const reqMembershipBtn = get("reqMembershipBtn");
+const reqMembershipDialog = get("reqMembershipDialog");
+const reqMembershipDialogCloseBtn = get("reqMembershipDialogCloseBtn");
+
+const manageButtons = document.querySelectorAll(".message-remove-btn");
+const manageDialogs = document.querySelectorAll(".manage-message-dialog");
+
+function closeOnOutsideClick(dialog) {
+    dialog.addEventListener("click", (e) => {
+        const rect = dialog.getBoundingClientRect();
+        if (
+            e.clientX < rect.left ||
+            e.clientX > rect.right ||
+            e.clientY < rect.top ||
+            e.clientY > rect.bottom
+        ) {
+            dialog.close();
+        }
+        console.log("outside");
+    });
+}
+
+function setupModalDialog(openBtn, dialog, closeBtn) {
+    if (openBtn && dialog) {
+        openBtn.addEventListener("click", () => dialog.showModal());
+        closeOnOutsideClick(dialog);
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => dialog.close());
+    }
+}
+
+function setupToggleDialog(triggerBtn, dialog, extraToggleClass = null) {
+    if (!triggerBtn || !dialog) return;
+
+    triggerBtn.addEventListener("click", () => {
+        if (dialog.open) {
+            dialog.close();
+            extraToggleClass && arrow.classList.remove(extraToggleClass);
         } else {
-            userDialog.show();
-            arrow.classList.add("rotated");
+            dialog.show();
+            extraToggleClass && arrow.classList.add(extraToggleClass);
         }
     });
 
     document.addEventListener("click", (event) => {
-        if (!userInfo.contains(event.target) && userDialog.open) {
-            userDialog.close();
-            arrow.classList.remove("rotated");
-        }
-    });
-
-    newPostBtn.addEventListener("click", (e) => {
-        newMessageDialog.showModal();
-    });
-
-    newMessageDialogCloseBtn.addEventListener("click", () => {
-        newMessageDialog.close();
-    });
-
-    newMessageDialog.addEventListener("click", (e) => {
-        const dialogDimensions = newMessageDialog.getBoundingClientRect();
         if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
+            !triggerBtn.contains(event.target) &&
+            dialog.open &&
+            !dialog.contains(event.target)
         ) {
-            newMessageDialog.close();
-        }
-    });
-
-    reqMembershipBtn.addEventListener("click", (e) => {
-        reqMembershipDialog.showModal();
-    });
-
-    reqMembershipDialogCloseBtn.addEventListener("click", () => {
-        reqMembershipDialog.close();
-    });
-
-    reqMembershipDialog.addEventListener("click", (e) => {
-        const dialogDimensions = reqMembershipDialog.getBoundingClientRect();
-        if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
-        ) {
-            reqMembershipDialog.close();
+            dialog.close();
+            extraToggleClass && arrow.classList.remove(extraToggleClass);
         }
     });
 }
+
+setupToggleDialog(userInfo, userDialog, "rotated");
+setupModalDialog(newPostBtn, newMessageDialog, newMessageDialogCloseBtn);
+setupModalDialog(
+    reqMembershipBtn,
+    reqMembershipDialog,
+    reqMembershipDialogCloseBtn
+);
+
+manageButtons.forEach((btn, index) => {
+    const dialog = manageDialogs[index];
+
+    if (!btn || !dialog) return;
+
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (dialog.open) {
+            dialog.close();
+        } else {
+            dialog.show();
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!dialog.contains(e.target) && e.target !== btn) {
+            dialog.close();
+        }
+    });
+});
