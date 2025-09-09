@@ -95,11 +95,11 @@ https://members-only-h8am.onrender.com/
 Main Page
 ![Main Page](./screenshots/Main.png)
 
-Home Page
-![Home Page](./screenshots/Home.png)
-
 Login-SignUp
 ![Login-SignUp Page](./screenshots/Login-SignUp.png)
+
+Home Page
+![Home Page](./screenshots/Home.png)
 
 ## Acknowledgements
 
